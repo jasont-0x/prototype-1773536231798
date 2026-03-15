@@ -1,0 +1,24 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Apply for emergency housing support" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Apply for emergency housing support</h1>
+    <p class="govuk-body">Get emergency housing if you are fleeing domestic abuse.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>A safe way to receive messages</li>
+      <li>Details about your current situation</li>
+      <li>Information about any children with you</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>5 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/immediate-danger",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
