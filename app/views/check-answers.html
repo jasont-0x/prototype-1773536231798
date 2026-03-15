@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you in immediate danger right now?" },
+        value: { text: data["immediate-danger"] if data["immediate-danger"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/immediate-danger",
+            text: "Change",
+            visuallyHiddenText: "are you in immediate danger right now?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have children with you who need housing?" },
+        value: { text: data["have-children"] if data["have-children"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/have-children",
+            text: "Change",
+            visuallyHiddenText: "do you have children with you who need housing?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your current accommodation situation?" },
+        value: { text: data["current-accommodation"] if data["current-accommodation"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/current-accommodation",
+            text: "Change",
+            visuallyHiddenText: "what is your current accommodation situation?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have a safe way for us to contact you?" },
+        value: { text: data["safe-contact"] if data["safe-contact"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/safe-contact",
+            text: "Change",
+            visuallyHiddenText: "do you have a safe way for us to contact you?"
+          }]
+        }
+      },
+      {
+        key: { text: "Give us your safe contact details" },
+        value: { text: data["contact-details"] if data["contact-details"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "give us your safe contact details"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
