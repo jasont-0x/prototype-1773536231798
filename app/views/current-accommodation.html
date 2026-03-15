@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your current accommodation situation?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["current-accommodation"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["current-accommodation"], href: "#current-accommodation" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "current-accommodation",
+      fieldset: {
+        legend: {
+          text: "What is your current accommodation situation?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["current-accommodation"] if errors else null,
+      value: data["current-accommodation"],
+      items: [
+        { value: "safe-tonight", text: "I have somewhere safe to stay tonight" },
+        { value: "nowhere-safe", text: "I have nowhere safe to stay tonight" },
+        { value: "with-abuser", text: "I am still living with the abusive person" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
