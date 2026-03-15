@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Give us your safe contact details" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["contact-details"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["contact-details"], href: "#contact-details" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "contact-details",
+      name: "contact-details",
+      label: {
+        text: "Give us your safe contact details",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Include your phone number, email address or postal address. Only give details that are safe for us to use." },
+      errorMessage: errors["contact-details"] if errors else null,
+      value: data["contact-details"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
